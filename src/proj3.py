@@ -64,6 +64,6 @@ connection.recvline()
 flag1 = connection.recvline()[ : -1 ]
 print flag1
 
-# Write the flag1 into file flag1.txt
-with open('flag1.txt', 'w') as file:
+# Write the flag1 into file ../out/flag1.txt
+with open('../out/flag1.txt', 'w') as file:
     file.write(flag1)

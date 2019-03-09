@@ -47,7 +47,7 @@ void magic2() {
 
 void magic1() {
     char buf[64];
-    int fd = open("./flag1", O_RDONLY);
+    int fd = open("../out/flag1", O_RDONLY);
 
     if (fd <= 0) {
         printf("NOOO!\n");
