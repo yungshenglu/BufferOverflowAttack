@@ -1,12 +1,11 @@
 # Buffer Overflow
 
-[![License: IEEE](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](http://creativecommons.org/licenses/by-nc-sa/4.0/)
-
-This project will introduce you to control-flow hijacking vulnerabilities in application software, including buffer overflows. Notice that this repository is the course assignment of "Network Security 2018" in NCTU CS. If you are taking this course, please do not duplicate from this repository. All rights reserved.
+This repository is the assignment in NCTU course "Network Security".
 
 ---
-## Goals
+## Abstract
 
+This project will introduce you to control-flow hijacking vulnerabilities in application software, including buffer overflows.
 * Be able to identify and avoid buffer overflow vulnerabilities in native code.
 * Understand the severity of buffer overflows and the necessity of standard defenses.
 * Gain familiarity with machine architecture and assembly language.
@@ -19,7 +18,7 @@ This project will introduce you to control-flow hijacking vulnerabilities in app
 ---
 ## Solutions
 
-* **Step 0** – Before starting, we should try to use the serve and observe vulnerabilities
+1. Before starting, we should try to use the serve and observe vulnerabilities
     ```
     # Connect to the server 140.113.194.66:8787
     $ nc 140.113.194.66 8787
@@ -42,7 +41,7 @@ This project will introduce you to control-flow hijacking vulnerabilities in app
         * After the array info in the struct `SEC`, there is a 4 bytes unsigned long variable called `secret` which is a random number. The only way to change the content of `secret` is in the while loop which is in the function func.
     * In the program `proj3.c`, the function `edit_note` with a pointer `s`  as parameter which type `STU` is a struct includes variable `name` (16 bytes), `note` (16 bytes), `stuid` (16 bytes), and `age` (4 bytes). The total sizes are 44 bytes.
         * In the program `proj3.asm`, we can observe that the memory stack pushes 88 bytes for two persons `s` started from `ebp-0x60`.
-* **Step 1** – Start to attack by using buffer overflow
+2. Start to attack by using buffer overflow
     * By using buffer overflow to attack the server, we need to find out the input place that can let us input some payload to make the returned address be wrong (e.g., we want to get the content of the variable `magic1`, so that we need to return to `magic1`’s address).
     * In the program `proj3.c`, the function `menu` is the place to input some payload.
         * After connecting to the server, we can choose `2` to enter the mode of edit info. Then, the server will ask to enter the `secret` and there exists a severe problem.
@@ -87,7 +86,7 @@ This project will introduce you to control-flow hijacking vulnerabilities in app
             Your choice:
             ```
         * The value shows after age is the `secret`’s value (`2928863094`) because the address of `secret` is `ebp-0x60`. which is the top 4 bytes before `s[0]` from above 44 bytes. Notice that the `secret`’s value is a random number.
-* **Step 2** – Enter into the edited mode
+3. Enter into the edited mode
     * After entering into the edited mode, we can enter the `secret`’s value (`2928863094`) and choose one user arbitrarily.
 
         ```
@@ -121,15 +120,14 @@ This project will introduce you to control-flow hijacking vulnerabilities in app
 
     * In the program `proj3.c`, we found that we still cannot get the returned address we want if we only enter a positive integer less than 16 (line 124). Therefore, we enter `-1` because `-1` is a largest number in 2-based complement system so that we can trace back to the top of address in memory stack.
     * After entering `-1`, we are at the address of `note` in the struct `STU`. In that there is a variable name (16 bytes) before note, we can get the address of `note` from `s[0]` be `ebp-0x50`. Thus, we need to push 84 bytes ($5 \times 16 + 4 = 84$) to get the returned address.
-* **Step 3** – Get the `flag1`
+4. Get the `flag1`
     * Finally, we found that `magic1` will cover the original address at `080489e0` so that we can get the `flag1` after choose `3` to exit. Notice that the address need to be written in format of little endian.
     ![](https://i.imgur.com/PDDjfHZ.png)
 
 ---
-## File Structure
+## File Description
 
 * `proj3.c` - The program of server on `140.113.194.66:8787`
-* `prog3` - The execution file of `proj3.c`
 * `proj3.asm` - The assembly program of `proj3.c`
 * `proj3.py` - The program using buffer overflow to attack
 * `flag1.txt` - The content of `flag1`
@@ -138,6 +136,7 @@ This project will introduce you to control-flow hijacking vulnerabilities in app
 ## Execution
 
 ```bash
+# Make sure your current directory is in "src/"
 # Execute the main.py for hacking the cipher
 $ python proj3.py
 [+] Opening connection to 140.113.194.66 on port 8787: Done
@@ -151,16 +150,13 @@ FLAG{G00D_J0b!}
 ```
 
 ---
-## TODO
-
-(Update soon.)
-
----
-## Contributor
+## Author
 
 * [David Lu](https://github.com/yungshenglu)
 
 ---
-> This repository is the course assignment of "Network Security 2018" in NCTU CS. If you are taking this course, please do not duplicate from this repository. All rights reserved.
+## License
 
-[![License: IEEE](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](http://creativecommons.org/licenses/by-nc-sa/4.0/)
+[GNU GENERAL PUBLIC LICENSE Version 3](LICENSE)
+
+> This repository is the course assignment in NCTU course "Network Security 2018". If you are taking this course, please do not duplicate from this repository. All rights reserved.
