@@ -118,7 +118,7 @@ This project will introduce you to control-flow hijacking vulnerabilities in app
     * In the program `proj3.c`, we found that we still cannot get the returned address we want if we only enter a positive integer less than 16 (line 124). Therefore, we enter `-1` because `-1` is a largest number in 2-based complement system so that we can trace back to the top of address in memory stack.
     * After entering `-1`, we are at the address of `note` in the struct `STU`. In that there is a variable name (16 bytes) before note, we can get the address of `note` from `s[0]` be `ebp-0x50`. Thus, we need to push 84 bytes ($5 \times 16 + 4 = 84$) to get the returned address.
 4. Get the `flag1`
-    * Finally, we found that `magic1` will cover the original address at `080489e0` so that we can get the `flag1` after choose `3` to exit. Notice that the address need to be written in format of little endian.
+    * Finally, we can find that `magic1` will cover the original address at `080489e0` so that we can get the `flag1` after choose `3` to exit. Notice that the address need to be written in format of little endian.
     ![](https://i.imgur.com/PDDjfHZ.png)
 
 ---
