@@ -1,14 +1,11 @@
-# Buffer Overflow
-
-This repository is the assignment in NCTU course "Network Security".
-
----
-## Abstract
+# Buffer Overflow Attack in Simulation
 
 This project will introduce you to control-flow hijacking vulnerabilities in application software, including buffer overflows.
 * Be able to identify and avoid buffer overflow vulnerabilities in native code.
 * Understand the severity of buffer overflows and the necessity of standard defenses.
 * Gain familiarity with machine architecture and assembly language.
+
+> **NOTCIE:** This repository is the assignment in NCTU course "Network Security 2018". If you are taking this course, please do not duplicate from this repository. All rights reserved.
 
 ---
 ## Description
@@ -135,28 +132,35 @@ This project will introduce you to control-flow hijacking vulnerabilities in app
 ---
 ## Execution
 
-```bash
-# Make sure your current directory is in "src/"
-# Execute the main.py for hacking the cipher
-$ python proj3.py
-[+] Opening connection to 140.113.194.66 on port 8787: Done
-2928863094
-FLAG{G00D_J0b!}
-[*] Closed connection to 140.113.194.66 port 8787
-
-# Show the true plaintext
-$ cat flag1.txt
-FLAG{G00D_J0b!}
-```
+1. Execute the `main.py`
+    ```bash
+    # Make sure your current directory is in "src/"
+    $ python proj3.py
+    ```
+    * If succeed, you will see the following result
+        ```bash
+        [+] Opening connection to 140.113.194.66 on port 8787: Done
+        2928863094
+        FLAG{G00D_J0b!}
+        [*] Closed connection to 140.113.194.66 port 8787
+        ```
+2. Show the true plaintext
+    ```bash
+    # Make sure your current directory is in "out/"
+    $ cat flag1.txt
+    FLAG{G00D_J0b!}
+    ```
 
 ---
-## Author
+## Contributor
+
+> **NOTICE:** You can follow the contributing process [CONTRIBUTING.md](CONTRIBUTING.md) to join me. I am very welcome any issue!
 
 * [David Lu](https://github.com/yungshenglu)
 
 ---
 ## License
 
-[GNU GENERAL PUBLIC LICENSE Version 3](LICENSE)
+> **NOTCIE:** This repository is the assignment in NCTU course "Network Security 2018". If you are taking this course, please do not duplicate from this repository. All rights reserved.
 
-> This repository is the course assignment in NCTU course "Network Security 2018". If you are taking this course, please do not duplicate from this repository. All rights reserved.
+[GNU GENERAL PUBLIC LICENSE Version 3](LICENSE)
